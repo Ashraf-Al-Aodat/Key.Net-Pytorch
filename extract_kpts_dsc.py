@@ -49,9 +49,9 @@ def extract_features():
     keynet_model, desc_model = initialize_networks(conf)
 
     # read image and extract keypoints and descriptors
-    f = open(args.list_images, "r")
+    # f = open(args.list_images, "r")
     # for path_to_image in f:
-    lines = f.readlines()
+    lines = [args.list_images] # f.readlines()
     for idx_im in tqdm(range(len(lines))):
         tmp_line = lines[idx_im].split('\n')[0]
         im_path = os.path.join(args.root_images, tmp_line)
@@ -65,3 +65,7 @@ def extract_features():
         np.save(result_path + '.dsc', desc)
 
     print('{} feature extraction finished.'.format(args.method_name))
+
+
+if __name__ == "__main__":
+    extract_features()
